@@ -20,7 +20,9 @@ def get_ordered_list_of_bitstrings(num_qubits):
     return bitstrings
 
 # Insert the path to your JSON file here
-with open('./examples/qcbm-example.json') as f:
+#with open('./examples/output_clipped_log_likelihood.json') as f:
+#with open('./examples/output_mmd.json') as f:
+with open('./examples/output_kl_divergence.json') as f:
     data = json.load(f)
 
 # Extract lists of energies, bond lengths, and basis sets.

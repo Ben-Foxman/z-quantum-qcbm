@@ -6,7 +6,7 @@ resources:
   type: git
   parameters:
     url: "git@github.com:zapatacomputing/z-quantum-core.git"
-    branch: "dev"
+    branch: "testing-cost-functions"
 - name: z-quantum-qcbm
   type: git
   parameters:
@@ -35,7 +35,7 @@ resources:
 
 # Specify the prefix to use when generating names of workflow executions.
 metadata:
-  generateName: qcbm-opt-
+  generateName: qcbm-kl-
 
 # The actual workflow specification
 spec:
@@ -80,8 +80,11 @@ spec:
           - n-qubits: "{{workflow.parameters.n-qubits}}"
           - n-layers: "{{workflow.parameters.n-layers}}"
           - topology: "{{workflow.parameters.topology}}"
-          - distance-measure-specs: "{'module_name': 'zquantum.core.bitstring_distribution', 'function_name': 'compute_clipped_negative_log_likelihood'}"
+          - distance-measure-specs: "{'module_name': 'zquantum.core.bitstring_distribution', 'function_name': 'compute_kl_divergence'}"
+          # - distance-measure-specs: "{'module_name': 'zquantum.core.bitstring_distribution', 'function_name': 'compute_clipped_negative_log_likelihood'}"
+          # - distance-measure-specs: "{'module_name': 'zquantum.core.bitstring_distribution', 'function_name': 'compute_mmd'}"
           - distance-measure-parameters: "{'epsilon': 1e-6}"
+          #- distance-measure-parameters: "{'sigma': 1.0}"
           - backend-specs: "{'module_name': 'qeforest.simulator', 'function_name': 'ForestSimulator', 'device_name': 'wavefunction-simulator'}"
           - optimizer-specs: "{'module_name': 'zquantum.optimizers.cma_es_optimizer', 'function_name': 'CMAESOptimizer', 'options': {'popsize': 5, 'sigma_0': 0.1, 'tolx': 1e-6}}"
           # - optimizer-specs: "{'module_name': 'zquantum.optimizers.scipy_optimizer', 'function_name': 'ScipyOptimizer', 'method': 'L-BFGS-B'}"
