@@ -86,14 +86,11 @@ class QCBMCostFunction(AnsatzBasedCostFunction):
                             "min": min,
                         }
                     )
-                    print("later MIN!!!", min)
                 else:
                     self.evaluations_history.append(
                         {"value": value, "params": parameters, "min": min}
                     )
-        #    self.evaluations_history.append({'value':value, 'params': parameters, 'bitstring_distribution': distribution.distribution_dict})
-        # print(self.evaluations_history, flush=True)
-        print(f"History length: {len(self.evaluations_history)}")
+
         return ValueEstimate(value)
 
     def _evaluate(self, parameters: np.ndarray) -> (float, BitstringDistribution):
